@@ -34,6 +34,12 @@ class Person
   {
     return $this->name;
   }
+  
+  function getLastname()
+  {
+    return $this->lastname;
+  }
+  
   function getMother()
   {
     return $this->mother;
@@ -43,22 +49,39 @@ class Person
     return $this->father;
   }
   function getInfo(){
-    return "
-    <h3>A few words about myself:</h3><br>"."My name is: ".$this->getName()."<br> my lastname is: ".$this->getLastname()."<br> my father is: ".$this->getFather()->getName();
+   return 
+   "<h3>A few words about myself:</h3><br>"."My name is: ".$this->getName()."<br> my lastname is: ".$this->getLastname().
+   "<br> my father is: ".$this->getFather()->getName().
+   "<br> my mother is: ".$this->getMother()->getName().  
 
+   "<br> my father's dad is: ".$this->getFather()->getFather()->getName().
+   "<br> my father's mom is: ".$this->getFather()->getMother()->getName().
+     
+   "<br> my mother's dad is: ".$this->getMother()->getFather()->getName().
+   "<br> my mother's mom is: ".$this->getMother()->getMother()->getName();
+    
+    
+    
   }
 }
 // Здоровье человека не может быть выше 100
-$igor = new Person("Igor", "Petrov", 68);
+$peter = new Person("Peter", "Ivanov", 70);
+$helen = new Person("Helen", "Ivanova", 69);
 
-$alex = new Person("Alex", "Ivanov", 42);
-$olga = new Person("Olga", "Ivanova", 42, null, $igor);
+$igor = new Person("Igor", "Sidorov", 68);
+$nataly = new Person("Nataly", "Sidorova", 67);
+
+$alex = new Person("Alex", "Ivanov", 42, $helen, $peter);
+$olga = new Person("Olga", "Ivanova", 42, $nataly, $igor);
 $valera = new Person("Valera", "Ivanov", 15, $olga, $alex);
 
 echo $valera->getName() . "<br>";
 //echo $valera->mother->getName(); Так работать не будет, только через геттер
 echo $valera->getMother()->getName() . "<br>"; //Получаем маму Валеры
 echo $valera->getMother()->getFather()->getName();//Получаем дедушку Валеры
+
+echo $valera->getInfo();
+
 
 // $igor = new Person("Igor", "Petrov", 38);
 // echo $alex->sayHi($igor->name);
